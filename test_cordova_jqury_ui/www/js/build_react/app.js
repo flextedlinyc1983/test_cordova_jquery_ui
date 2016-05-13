@@ -135,6 +135,19 @@ var JQueryMobileContent = React.createClass({
 });
 JQueryMobileContent = React.createFactory(JQueryMobileContent);
 
+/** jQuery Mobile menu component. */
+var JQueryMobileMenu = React.createClass({
+    displayName: 'JQueryMobileMenu',
+
+    render: function () {
+        return React.DOM.nav({ 'id': 'menu' },
+          React.DOM.ul(null, 
+           React.DOM.li(null, React.DOM.a(null,'Home')),
+           React.DOM.li(null, React.DOM.a(null,'About us'))));
+    }
+});
+JQueryMobileMenu = React.createFactory(JQueryMobileMenu);
+
 /** jQuery Mobile footer component. */
 var JQueryMobileFooter = React.createClass({
   displayName: 'JQueryMobileFooter',
@@ -153,7 +166,9 @@ var JQueryMobileHeader = React.createClass({
 
   render: function() {
     return React.DOM.div({'data-role':'header', 'data-theme':this.props.headerTheme},
-      React.DOM.h1(null, this.props.title)
+      React.DOM.h1(null, this.props.title),
+      //menu
+      React.DOM.div({className:'header'}, React.DOM.a({'href':'#menu'},''))
     );
   }
 });
@@ -175,6 +190,7 @@ var JQueryMobilePage = React.createClass({
     return React.DOM.div(props,
       JQueryMobileHeader({title:'Page ' + this.props.id, headerTheme:this.props.headerTheme}),
       JQueryMobileContent(null, this.props.children),
+      JQueryMobileMenu(null),
       JQueryMobileFooter(null)
     );
   }
