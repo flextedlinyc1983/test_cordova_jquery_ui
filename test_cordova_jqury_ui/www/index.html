@@ -6,20 +6,81 @@
         視需要在下方的中繼標籤中自訂內容安全性原則。將 'unsafe-inline' 加入 default-src 以啟用內嵌 JavaScript。
         如需詳細資料，請參閱 http://go.microsoft.com/fwlink/?LinkID=617521
     -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+        <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' http://192.168.0.90:7500/login; default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
         
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+
+
+
+        <!-- Custom css -->
+        <link rel="stylesheet" href="css/custom.css" />
+        <!--<link rel="stylesheet" type="text/css" href="css/index.css">-->
+        
+        <!-- Startup Images for iDevices -->
+        <script type="text/javascript" src="js/startup_images_for_iDevices.js"></script>
+
+
         <title>testcordovajquryui</title>
     </head>
-    <body>
-        <div class="app">
-            <p id="deviceready" class="event">正在連接到裝置</p>
+
+
+    <body class="ui-mobile-viewport ui-overlay-a">
+        <div id="content"></div>
+    
+
+
+
+<!--<body>
+    <div data-role="page" id="index">
+        <div data-role="header">
+            <h1>jQuery Mobile Boilerplate 1.2</h1>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
-        <script type="text/javascript" src="scripts/index.js"></script>
-    </body>
+
+        <div data-role="content">
+
+
+            <ul data-role="listview" data-filter="true">
+                <li><a href="buttons.html">Buttons Test<span class="ui-li-count">22</span></a></li>
+                <li><a href="grids.html">Grids Test<span class="ui-li-count"></span></a></li>
+                <li><a href="popup.html">Popup Test<span class="ui-li-count"></span></a></li>
+            </ul>
+
+
+            <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b" data-count-theme="e">
+                <li>Snippet Pages</li>
+                <li><a href="buttons.html">Buttons</a></li>
+                <li><a href="buttons.html">Buttons</a></li>
+                <li><a href="grids.html">Grids</a></li>
+                <li><a href="forms.html">Form Elements</a></li>
+                <li><a href="collapsibles.html">Collapsible Boxes</a></li>
+                <li><a href="collapsible-sets.html">Collapsible Sets</a></li>
+                <li><a href="lists.html">List Views</a></li>
+            </ul>
+
+        </div>
+
+        <div data-role="footer">
+            <p>&copy; 2012 - jQuery Mobile Boilerplate</p>
+        </div>
+    </div>-->
+
+
+
+
+
+    <script type="text/javascript" src="scripts/jquery-2.2.3.min.js"></script>
+    <script src="js/mobileinit.js"></script>
+    <script type="text/javascript" src="scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="js/controller/test-controller.js"></script>
+    <!--<script type="text/javascript" src="scripts/index.js"></script>-->
+    <script src="js/build_react/react.js"></script>
+    <script src="js/build_react/react-dom.js"></script>
+    <script src="js/build_react/app.js"></script>
+    <script src="js/login.js"></script>
+</body>
 </html>

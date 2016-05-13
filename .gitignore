@@ -243,3 +243,18 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+# .md
+*.md
+
+# .json
+*.json
+
+# .xml
+*.xml
+
+# test_cordova_jqury_ui/plugins
+test_cordova_jqury_ui/plugins/
+
+# .svg
+*.svg
