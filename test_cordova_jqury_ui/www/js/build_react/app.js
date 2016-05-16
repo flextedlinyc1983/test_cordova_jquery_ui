@@ -62,6 +62,8 @@ var app = {
     // Update DOM on a Received Event
     receivedEvent: function (id) {
         //alert('deviceReady');
+
+        //webSQLDatabase();
     },
 
     onPause: function () {
@@ -329,3 +331,33 @@ ReactDOM.render(App(null), document.getElementById('content'));
 
 
 var allPages = $("div:jqmData(role='page')");
+
+var db;
+
+
+
+
+function webSQLDatabase() {
+    try {
+        alert((!window.openDatabase) ? "WEBSQL" : "local");
+
+        db = window.openDatabase('mydb', '1.0', 'first db', 2 * 1024 * 1024);
+
+        db.transaction(function (tx) {
+            tx.executeSql('Select * from employees', [], function (tx, results) {
+                var len = results.rows.length, i;
+                for (i = 0; i < len; i++) {
+                    alert(results.rows.item(i).firstName);
+                }
+            },null);
+        });
+    } catch (e) {
+        alert(e.message);
+    }
+
+    if (!db) {
+        alert('Can not connect to webSQLDatabse');
+    } else {
+        alert('webSQLDatabse ok');
+    }
+}
