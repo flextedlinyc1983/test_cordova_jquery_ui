@@ -153,7 +153,7 @@ var JQueryMobileFooter = React.createClass({
   displayName: 'JQueryMobileFooter',
 
   render: function() {
-    return React.DOM.div({'data-role':'footer'},
+    return React.DOM.div({'data-role':'footer', 'data-position':'fixed'},
       React.DOM.h4(null, 'Page footer')
     );
   }
@@ -165,7 +165,7 @@ var JQueryMobileHeader = React.createClass({
   displayName: 'JQueryMobileHeader',
 
   render: function() {
-    return React.DOM.div({'data-role':'header', 'data-theme':this.props.headerTheme},
+    return React.DOM.div({'data-role':'header', 'data-theme':this.props.headerTheme, 'data-position':'fixed'},
       React.DOM.h1(null, this.props.title),
       //menu
       React.DOM.div({className:'header'}, React.DOM.a({'href':'#menu'},''))
