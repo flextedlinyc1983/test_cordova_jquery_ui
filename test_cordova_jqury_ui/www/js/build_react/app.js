@@ -107,7 +107,13 @@ $(document).delegate('#popup', 'pageinit', function (event) {
     $("#popup div.header").remove();
 });
 
-
+$(window).bind("orientationchange", function (orientation) {
+    if (orientation.orientation == 'landscape') {
+        alert('landscape');
+    } else {
+        alert('portrait');
+    }
+});
 
 
 /** Main application component. */
