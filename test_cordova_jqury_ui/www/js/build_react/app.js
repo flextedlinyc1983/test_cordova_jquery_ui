@@ -95,7 +95,24 @@ $(document).delegate("#pageTemplate", "pagebeforecreate", function () {
 
 $(document).delegate('#pageTemplate', 'pageinit', function (event) {
     alert('pageTemplate pageinit');
+
+    $("#pageTemplate").on('swiperight', goToOne);
+
+
+    $("#pageTemplate").on('tap', pageTemplateTap);
+    
 });
+
+
+
+function pageTemplateTap() {
+    console.log("pageTemplateTap ok");
+};
+
+function goToOne() {
+    $.mobile.changePage("#one", { reverse: true });
+    $("#pageTemplate").unbind('swiperight', goToOne);
+};
 
 $(document).delegate('#two', 'pageinit', function (event) {
     alert('two pageinit');
@@ -397,3 +414,5 @@ function webSQLDatabase() {
         alert('webSQLDatabse ok');
     }
 }
+
+

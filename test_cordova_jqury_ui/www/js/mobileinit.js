@@ -27,8 +27,10 @@
     $.mobile.changePage.defaults.changeHash = false;
 
 
-
+    //$("#pageTemplate").live('swiperight', goToOne);
 });
+
+
 
 
 //function goBackToPage1() {
