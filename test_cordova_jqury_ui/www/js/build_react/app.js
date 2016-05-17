@@ -103,7 +103,20 @@ $(document).delegate('#pageTemplate', 'pageinit', function (event) {
     
 });
 
+$(document).delegate('#login', 'pageinit', function (event) {
 
+
+    var m_str = '';
+    for (var i = 0; i < 100; i++) {
+        m_str += "<li><a>Test" + i + "</a></li>";
+    }
+    $("nav#menu ul").html(m_str);
+
+    alert('login pageinit' + ' items:' + $('nav#menu li').length);
+
+    //$('#menu  ul.mm-listview').length
+
+});
 
 function pageTemplateTap() {
     console.log("pageTemplateTap ok");
@@ -233,7 +246,7 @@ var JQueryMobilePage = React.createClass({
     return React.DOM.div(props,
       JQueryMobileHeader({title:'Page ' + this.props.id, headerTheme:this.props.headerTheme}),
       JQueryMobileContent(null, this.props.children),
-      JQueryMobileMenu(null),
+      //JQueryMobileMenu(null),
       JQueryMobileFooter(null)
     );
   }
@@ -381,7 +394,7 @@ PagePopUpContent = React.createFactory(PagePopUpContent);
 
 // Render application.
 ReactDOM.render(App(null), document.getElementById('content'));
-
+ReactDOM.render(JQueryMobileMenu(null), document.getElementById('div-menu'));
 
 var allPages = $("div:jqmData(role='page')");
 
