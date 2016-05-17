@@ -93,6 +93,21 @@ $(document).delegate("#pageTemplate", "pagebeforecreate", function () {
     alert('pageTemplate pagebeforecreate');
 });
 
+$(document).delegate('#pageTemplate', 'pageinit', function (event) {
+    alert('pageTemplate pageinit');
+});
+
+$(document).delegate('#two', 'pageinit', function (event) {
+    alert('two pageinit');
+});
+
+
+$(document).delegate('#popup', 'pageinit', function (event) {
+    alert($(".header").length);
+    $("#popup div.header").remove();
+});
+
+
 
 
 /** Main application component. */
