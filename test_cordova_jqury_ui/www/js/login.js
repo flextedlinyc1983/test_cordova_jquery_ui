@@ -3,9 +3,29 @@
     status: ''
 }
 
+$(document).on('pagebeforechange', function (event, data) {
+    var url = $.mobile.path.parseUrl(data.toPage).hash;
+
+    alert(url);
+
+
+    if (url != undefined && url.substring(0, 5) == "#home") {
+        alert(url.substring(0, 5));
+
+        $("#pageTemplate h1.content").html("<a href='#two' class='ui-btn ui-shadow ui-corner-all'>Show page 'two'</a>");
+
+        $.mobile.changePage($("#pageTemplate"));
+
+        event.preventDefault();
+    }
+});
+
 $(document).on('pagecontainershow', function (e, ui) {
     var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
     if (activePage.attr('id') === 'login') {
+
+        $("ul.mm-listview").append("<li><a class='ui-link'>Test</a></li>");
+
         $(document).on('click', '#submit', function () { // catch the form's submit event
             if ($('#username').val().length > 0 && $('#password').val().length > 0) {
 
@@ -81,6 +101,8 @@ $(document).on('pagecontainerbeforechange', function (e, ui) {
     }
 });
 
+
+
 $(document).on("pagecontainerbeforeshow", function (event, ui) {
     var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
     var activePageID = activePage.attr('id');
@@ -103,6 +125,8 @@ $(document).on("pagecontainerbeforeshow", function (event, ui) {
         }
     }
 });
+
+
 
 $(document).delegate("#home", "pagebeforecreate", function (event, ui) {
     var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');

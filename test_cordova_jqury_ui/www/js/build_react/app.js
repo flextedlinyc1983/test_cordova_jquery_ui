@@ -89,7 +89,9 @@ $(document).delegate("#two", "pagebeforecreate", function () {
     alert('two pagebeforecreate');
 });
 
-
+$(document).delegate("#pageTemplate", "pagebeforecreate", function () {
+    alert('pageTemplate pagebeforecreate');
+});
 
 
 
@@ -103,7 +105,8 @@ var App = React.createClass({
       JQueryMobilePage({ id: 'home' }, HomeContent(null)),
       JQueryMobilePage({ id: 'two' }, PageTwoContent(null)),
       JQueryMobilePage({id:'one'}, PageOneContent(null)),
-      JQueryMobilePage({id:'popup', headerTheme:'b'}, PagePopUpContent(null))
+      JQueryMobilePage({id:'popup', headerTheme:'b'}, PagePopUpContent(null)),
+      JQueryMobilePage({ id: 'pageTemplate' }, PageTemplateContent(null))
     );
   }
 });
@@ -257,6 +260,18 @@ var LoginContent = React.createClass({
     }
 });
 LoginContent = React.createFactory(LoginContent);
+
+/** Application page one component. */
+var PageTemplateContent = React.createClass({
+    displayName: 'PageTemplateContent',
+
+    render: function () {
+        return React.DOM.div(null,
+          React.DOM.h1({className:'content'}, 'Template')
+        );
+    }
+});
+PageTemplateContent = React.createFactory(PageTemplateContent);
 
 /** Application page one component. */
 var PageOneContent = React.createClass({
