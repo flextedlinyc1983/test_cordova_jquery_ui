@@ -99,7 +99,7 @@ $(document).on('pagecontainerbeforechange', function (e, ui) {
 
 
                 $("#" + activePage.attr('id') + " li a").removeClass("ui-state-persist ui-btn-active");
-                $("#"  + activePage.attr('id') + " #footer-pageTemplate").addClass("ui-state-persist ui-btn-active");
+                //$("#"  + activePage.attr('id') + " #footer-pageTemplate").addClass("ui-state-persist ui-btn-active");
             }
         }
     //}

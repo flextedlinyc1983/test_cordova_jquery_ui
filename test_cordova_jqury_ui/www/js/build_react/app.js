@@ -157,6 +157,7 @@ $(document).delegate('#two', 'pageinit', function (event) {
 $(document).delegate('#popup', 'pageinit', function (event) {
     alert($(".header").length);
     $("#popup div.header").remove();
+    $("#popup div.ui-navbar").remove();
 });
 
 $(window).bind("orientationchange", function (orientation) {
