@@ -118,8 +118,10 @@ $(document).delegate('#login', 'pageinit', function (event) {
     alert('login pageinit' + ' items:' + $('nav#menu li').length);
 
     //$('#menu  ul.mm-listview').length
-
+    
     var m_str = '';
+    m_str += "<li class='ui-li-has-count ui-li-has-thumb'><a id='1' class='cars ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='https://s.yimg.com/ja/ap/tw/store/f/p0409103844478.jpg'><hx>Test1</hx><p>$2.00</p><span class='ui-li-count ui-body-inherit'>3</span></a></li>";
+    m_str += "<li class='ui-li-has-count ui-li-has-thumb'><a id='1' class='cars ui-btn ui-btn-icon-right ui-icon-carat-r'><img src='file:///D:/ted_visualstudio_demo/test_cordova_jqury_ui/test_cordova_jqury_ui/www/images/listview/localfile.jpg'><hx>Test1</hx><p>$2.00</p><span class='ui-li-count ui-body-inherit'>3</span></a></li>";
     for (var i = 0; i < 20; i++) {
         m_str += "<li data-role='list-divider'>" + "Group" + i ;
         //m_str += "  <ul data-role='listview' class='nested-listview-1'>";
