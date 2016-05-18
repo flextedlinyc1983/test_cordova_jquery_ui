@@ -82,7 +82,7 @@ $(document).on('pagecontainershow', function (e, ui) {
 
 $(document).on('pagecontainerbeforechange', function (e, ui) {
     var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
-    if (activePage.attr('id') === 'home') {
+    //if (activePage.attr('id') === 'home' || activePage.attr('id') === 'pageTemplate') {
         var to = ui.toPage;
 
         if (typeof to === 'string') {
@@ -96,9 +96,13 @@ $(document).on('pagecontainerbeforechange', function (e, ui) {
 
                 // remove active status on a button if a transition was triggered with a button
                 $('#back-btn').removeClass('ui-btn-active ui-shadow').css({ 'box-shadow': '0 0 0 #3388CC' });
+
+
+                $("#" + activePage.attr('id') + " li a").removeClass("ui-state-persist ui-btn-active");
+                $("#"  + activePage.attr('id') + " #footer-pageTemplate").addClass("ui-state-persist ui-btn-active");
             }
         }
-    }
+    //}
 });
 
 

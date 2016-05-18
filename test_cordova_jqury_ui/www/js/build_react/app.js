@@ -100,7 +100,10 @@ $(document).delegate('#pageTemplate', 'pageinit', function (event) {
 
 
     $("#pageTemplate").on('tap', pageTemplateTap);
+
     
+    $("#pageTemplate li a").removeClass("ui-state-persist ui-btn-active");
+    $("#pageTemplate #footer-pageTemplate").addClass("ui-state-persist ui-btn-active");
 });
 
 $(document).delegate('#login', 'pageinit', function (event) {
@@ -115,6 +118,25 @@ $(document).delegate('#login', 'pageinit', function (event) {
     alert('login pageinit' + ' items:' + $('nav#menu li').length);
 
     //$('#menu  ul.mm-listview').length
+
+    var m_str = '';
+    for (var i = 0; i < 20; i++) {
+        m_str += "<li data-role='list-divider'>" + "Group" + i ;
+        //m_str += "  <ul data-role='listview' class='nested-listview-1'>";
+        for (var j = 1; j < 4; j++) {
+            m_str += "<li><a><img src='images/listview/" + j + ".jpg'><hx>Test" + j + "</hx>" +
+                "<p>$"+ 2*j + ".00</span></p><span class='ui-li-count'>"+ 3*j +"</span></a></li>";
+        }
+        //m_str += "  </ul>";
+        m_str += "</li>";
+    }
+    alert($("#pageTemplate ul").length);
+    $("#pageTemplate ul.nested-listview-0").html(m_str);
+    //$("#pageTemplate .nested-listview-0").listview('refresh');
+    //$("#pageTemplate .nested-listview-1").listview('refresh');
+
+    $("#footer-home").addClass("ui-state-persist");
+    
 
 });
 
@@ -210,7 +232,14 @@ var JQueryMobileFooter = React.createClass({
 
   render: function() {
     return React.DOM.div({'data-role':'footer', 'data-position':'fixed'},
-      React.DOM.h4(null, 'Page footer')
+      React.DOM.div({ 'data-role': 'navbar' },
+         React.DOM.ul(null,
+            React.DOM.li(null, React.DOM.a({'id':'footer-home','href':'#login','class':'ui-btn-active'},'Home')),
+            React.DOM.li(null, React.DOM.a({ 'id': 'footer-pageTemplate', 'href': '#pageTemplate' }, 'pageTemplate')),
+            React.DOM.li(null, React.DOM.a({'href':'#'},'Events')),
+            React.DOM.li(null, React.DOM.a({'href':'#'},'News'))
+            )
+        )
     );
   }
 });
@@ -318,7 +347,9 @@ var PageTemplateContent = React.createClass({
 
     render: function () {
         return React.DOM.div(null,
-          React.DOM.h1({className:'content'}, 'Template')
+          React.DOM.h1({ className: 'content' }, 'Template'),
+          React.DOM.div({ className: 'content', 'data-role': 'content'},
+            React.DOM.ul({ 'data-filter':'true', className:'nested-listview-0', 'data-role': 'listview','data-inset':'true' }, 'Template'))
         );
     }
 });
