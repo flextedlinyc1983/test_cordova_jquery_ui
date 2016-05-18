@@ -123,8 +123,8 @@ $(document).delegate('#login', 'pageinit', function (event) {
     for (var i = 0; i < 20; i++) {
         m_str += "<li data-role='list-divider'>" + "Group" + i ;
         //m_str += "  <ul data-role='listview' class='nested-listview-1'>";
-        for (var j = 1; j < 4; j++) {
-            m_str += "<li><a><img src='images/listview/" + j + ".jpg'><hx>Test" + j + "</hx>" +
+        for (var j = 1; j < 7; j++) {
+            m_str += "<li><a id='" + j + "' class='cars'><img src='images/listview/" + j + ".jpg'><hx>Test" + j + "</hx>" +
                 "<p>$"+ 2*j + ".00</span></p><span class='ui-li-count'>"+ 3*j +"</span></a></li>";
         }
         //m_str += "  </ul>";
