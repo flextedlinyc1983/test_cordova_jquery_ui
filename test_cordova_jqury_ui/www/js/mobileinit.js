@@ -28,6 +28,9 @@
 
 
     //$("#pageTemplate").live('swiperight', goToOne);
+
+
+    alert(navigator.platform);
 });
 
 

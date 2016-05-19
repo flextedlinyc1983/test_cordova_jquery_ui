@@ -182,7 +182,8 @@ var App = React.createClass({
       JQueryMobilePage({ id: 'two' }, PageTwoContent(null)),
       JQueryMobilePage({id:'one'}, PageOneContent(null)),
       JQueryMobilePage({id:'popup', headerTheme:'b'}, PagePopUpContent(null)),
-      JQueryMobilePage({ id: 'pageTemplate' }, PageTemplateContent(null))
+      JQueryMobilePage({ id: 'pageTemplate' }, PageTemplateContent(null)),
+      JQueryMobilePage({ id: 'sessions' }, sessionsContent(null))
     );
   }
 });
@@ -239,7 +240,7 @@ var JQueryMobileFooter = React.createClass({
          React.DOM.ul(null,
             React.DOM.li(null, React.DOM.a({'id':'footer-home','href':'#login','class':'ui-btn-active'},'Home')),
             React.DOM.li(null, React.DOM.a({ 'id': 'footer-pageTemplate', 'href': '#pageTemplate' }, 'pageTemplate')),
-            React.DOM.li(null, React.DOM.a({'href':'#'},'Events')),
+            React.DOM.li(null, React.DOM.a({'href':'#sessions'},'Sessions')),
             React.DOM.li(null, React.DOM.a({'href':'#'},'News'))
             )
         )
@@ -343,6 +344,36 @@ var LoginContent = React.createClass({
     }
 });
 LoginContent = React.createFactory(LoginContent);
+
+/** Application page one component. */
+var sessionsContent = React.createClass({
+    displayName: 'sessionsContent',
+
+    render: function () {
+        return React.DOM.div(null,          
+          React.DOM.p({ 'id': 'console' }, null),
+          React.DOM.ul({'data-role':'list-view', 'data-inset':'true', 'id':'slots'}, null),
+          React.DOM.div({ 'data-role': 'controlgroup', 'data-type': 'horizontal' },
+            React.DOM.a({ 'id': 'prev-btn', 'data-role': 'button' }, 'prev'),
+			React.DOM.a({ 'id': 'next-btn', 'data-role': 'button' }, 'next')
+	        )//,
+          //React.DOM.div({ 'class': "ui-grid-a ui-responsive" },
+          //  React.DOM.div({ 'class': "ui-block-a" },
+          //          React.DOM.a({'data-role': 'button', 'data-inline': 'true' }, 'test1')
+          //      ),
+          //  React.DOM.div({'class':"ui-block-b"},
+		  //          React.DOM.a({'data-role': 'button', 'data-inline':'true' }, 'test2')		
+		  //      )
+	      //  ),
+          //React.DOM.div({ 'class': "ui-grid-solo" },
+          //  React.DOM.div({ 'class': "ui-block-a" },
+          //          React.DOM.a({ 'data-role': 'button', 'class':"ui-btn ui-shadow ui-corner-all"}, 'Grid Solo' )
+          //      )
+	      //  )
+        );
+    }
+});
+sessionsContent = React.createFactory(sessionsContent);
 
 /** Application page one component. */
 var PageTemplateContent = React.createClass({
@@ -463,3 +494,80 @@ function webSQLDatabase() {
 }
 
 
+function loadSessionAjax(page) {
+    $.ajax({
+        url: 'http://192.168.0.90:7500/api/entries/'+ page,
+        type: 'GET',
+        dataType: 'json'
+        // data: {param1: 'value1'}
+    }).done(function (data, textStatus, xhr) {
+        alert("sessions success");
+        if (window.localStorage != undefined) {
+            if (window.localStorage.getItem("data") != undefined &&
+                    window.localStorage.getItem("data") != null) {
+
+                if(xhr.responseText == window.localStorage.getItem("data")){
+                    $("#console").html("Schedule is updated");
+                    showSessions(xhr.responseText);
+                }else {
+                    //if (confirm("Do you want to load it??")) {
+                    //    showSessions(xhr.responseText);
+                    //} else {
+                    //    $("#console").html("Schedule will be updated later");
+                    //}
+
+                        showSessions(xhr.responseText);
+                }
+
+            } else {
+                $("#console").html("Schedule is updated");
+                showSessions(xhr.responseText);
+            }
+
+        } else {
+            $("#console").html("Schedule is updated");
+            showSessions(xhr.responseText);
+        }
+
+    }).fail(function () {
+        alert("sessions error");
+    }).always(function () {
+        alert("sessions complete");
+    });
+}
+
+var data;
+var isFirstLoad = true;
+
+function showSessions(string) {
+    if (window.JSON != undefined) {
+        data = JSON.parse(string);
+    } else {
+        data = eval("(" + string + ")");
+    }
+    if (window.localStorage != undefined) {
+        window.localStorage.setItem("data", string);
+    }
+
+    $('#sessions #slots').html('');
+
+    var html = '';
+    for (var i = 0; i < data.length; i++) {
+        if(data[i].body != null){
+            html += "<li data-role='list-divider' data-groupingtheme='e'>" + data[i].username + ": " + data[i].title + "   " + "<pre style='white-space:pre-wrap; word-wrap:break-word'>" + data[i].body + "</pre>" + "</li>";
+        } else {
+            html += '';
+        }
+    }
+
+    $('#sessions #slots').html(html);
+    
+    if(isFirstLoad){
+        $('#sessions #slots').listview();
+        isFirstLoad = false;
+    } else {
+        $('#sessions #slots').listview('refresh');
+    }
+
+
+}

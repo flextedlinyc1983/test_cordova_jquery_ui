@@ -156,3 +156,64 @@ $(document).delegate("#home", "pagebeforecreate", function (event, ui) {
 
 
 });
+
+$(document).delegate("#sessions", "pageshow", function (event, ui) {
+    alert('sessions pageshow')
+
+    if (window.localStorage != undefined) {
+        if (window.localStorage.getItem("data") != undefined &&
+                window.localStorage.getItem("data") != null) {
+
+        } else {
+            $("#console").html("Downloading session data...(No Data)");
+        }
+
+    } else {
+        $("#console").html("Downloading session data...(No localStorage)");
+    }
+
+    // var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
+    // var activePageID = activePage.attr('id');
+    // if (typeof ui.toPage == "object") {
+    //     switch (ui.toPage.attr("id")) {
+    //         case "page-signup":
+    //             // Reset the signup form.
+    //             app.signupController.resetSignUpForm();
+    //             break;
+    //         case "page-test":
+    //             // Reset the signup form.
+    //             app.testController.resetSignUpForm();
+    //             break;
+    //         case "page-test2":
+    //             // Reset the signup form.
+    //             break;
+    //         case "home":
+    //             // Reset the signup form.
+    //             break;
+    //     }
+    // }
+
+
+    var i_page = '1';
+    loadSessionAjax(i_page);
+    $('#next-btn').click(function () {        
+        i_page = (parseInt(i_page) + 1).toString();
+        loadSessionAjax(i_page);
+
+        $('#prev-btn').show();
+    });
+
+    $('#prev-btn').click(function () {
+        i_page = (parseInt(i_page) - 1).toString();
+        loadSessionAjax(i_page);
+
+        if (i_page == '1')
+        {
+            $(this).hide();
+        }
+    });
+
+    $('#prev-btn').hide();
+
+
+});
