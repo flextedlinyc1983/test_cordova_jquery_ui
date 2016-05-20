@@ -46,7 +46,8 @@ $(document).on('pagecontainershow', function (e, ui) {
                     crossDomain: true,
                     type: 'post',
                     async: 'true',
-                    dataType: 'json',
+                    withCredentials: true,
+                    //dataType: 'json',
                     beforeSend: function () {
                         // This callback function will trigger before data is sent
                         $.mobile.loading('show'); // This will show Ajax spinner
@@ -78,6 +79,11 @@ $(document).on('pagecontainershow', function (e, ui) {
         //activePage.find('.ui-content').text('Wellcome ' + userHandler.username);
         activePage.find('#h2-welcome').text('Wellcome ' + userHandler.username);
     }
+
+
+
+
+
 });
 
 $(document).on('pagecontainerbeforechange', function (e, ui) {
@@ -131,6 +137,46 @@ $(document).on("pagecontainerbeforeshow", function (event, ui) {
 });
 
 
+$(document).delegate("#entryPost", "pageinit", function (event) {
+    var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
+    if (activePage.attr('id') === 'sessions') {
+        $(document).on('click', '#entryPost #post-new-submit', function () {        
+            $.ajax({
+                url: 'http://192.168.0.90:7500/login',
+                //url: 'http://localhost:1337/post',
+                data: { mobile: "true", title: $('#title').val().trim(), body: $('#body').val().trim() },
+                //data: {
+                //    entry: { title: $('#entryPost #title').val().trim(), 'body': $('#entryPost #body').val().trim() }
+                //},
+                crossDomain: true,
+                type: 'post',
+                async: 'true',
+                withCredentials: true,
+                //dataType: 'json',
+                beforeSend: function () {
+                    // This callback function will trigger before data is sent
+                    $.mobile.loading('show'); // This will show Ajax spinner
+                },
+                complete: function () {
+                    // This callback function will trigger on data sent/received complete   
+                    $.mobile.loading('hide'); // This will hide Ajax spinner
+                },
+                success: function (result) {
+                    // Check if authorization process was successful
+                    if (result.status == 'postsuccess') {
+                        $.mobile.changePage("#sessions");
+                    } else {
+                        alert('Post new unsuccessful!');
+                    }
+                },
+                error: function (request, error) {
+                    // This callback function will trigger on unsuccessful action               
+                    alert('Network error has occurred please try again!');
+                }
+            });
+        });
+    }
+});
 
 $(document).delegate("#home", "pagebeforecreate", function (event, ui) {
     var activePage = $(':mobile-pagecontainer').pagecontainer('getActivePage');
@@ -192,6 +238,10 @@ $(document).delegate("#sessions", "pageshow", function (event, ui) {
     //             break;
     //     }
     // }
+
+    $('#sessions #post-new-btn').click(function () {
+        $.mobile.changePage($("#entryPost"));
+    });
 
 
     var i_page = '1';

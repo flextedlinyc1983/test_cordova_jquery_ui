@@ -3,7 +3,7 @@
 // Definitions by: Stefan-Bieliauskas <http://www.conts.de>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
-/// <reference path="./../react/react.d.ts" />
+// <reference path="./../react/react.d.ts" />
 
 declare namespace __ReactDom {
     function render<P>(
